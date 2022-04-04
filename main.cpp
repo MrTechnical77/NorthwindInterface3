@@ -347,11 +347,8 @@ int main(){
                 prodInfoRes = mysql_store_result(conn);
                 prodInfoRow = mysql_fetch_row(prodInfoRes);
 
-                
-
-
-                // Crashes if ProductID does not exist in Inventory_Transactions :(
-                if(mysql_fetch_fields(prodInfoRes) != 0){
+                // Check to see if product is out of stock or does not exist in Inventory_Transactions
+                if(shipOrderIDRow == NULL){
                     if(atoi(prodInfoRow[0]) < atoi(shipOrderIDRow[1])){
                         inStock = false;
                         break;
@@ -446,8 +443,7 @@ int main(){
             std::cout << "Not yet implemented, check back later :)" << std::endl << std::endl;
         }
 
-    } while (userChoice != 0);
-    
+    } while (userChoice != 0);    
 
     mysql_close(conn);
 
