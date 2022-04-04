@@ -357,7 +357,7 @@ int main(){
                         break;
                     } else {
                         std::stringstream updateStream;
-                        updateStream << "UPDATE Inventory_Transactions SET Quantity = " << atoi(prodInfoRow[0]) - atoi(shipOrderIDRow[1]) << " WHERE ProductID = " << shipOrderIDRow[0] << ";";
+                        updateStream << "UPDATE Inventory_Transactions SET Quantity = " << atoi(prodInfoRow[0]) - atoi(shipOrderIDRow[1]) << ", TransactionType = 2, WHERE ProductID = " << shipOrderIDRow[0] << ";";
 
                         std::string updateString = updateStream.str();
                         mysql_query(conn, updateString.c_str());
@@ -395,13 +395,6 @@ int main(){
 
                 mysql_query(conn, orderProductIDsString.c_str());
                 shipOrderIDResult = mysql_store_result(conn);
-
-                
-                
-
-
-                
-
 
             } else {
                 std::cout << "Item is out of stock." << std::endl;
@@ -452,9 +445,6 @@ int main(){
             std::cout << "More Options" << std::endl << std::endl;
             std::cout << "Not yet implemented, check back later :)" << std::endl << std::endl;
         }
-        
-        
-
 
     } while (userChoice != 0);
     
